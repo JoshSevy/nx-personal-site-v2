@@ -1,0 +1,68 @@
+<div class="bg-white px-6 py-32 lg:px-8">
+  <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+    @if (blogContent.date) {
+      <p class="text-base font-semibold leading-7 text-indigo-600">{{ blogContent.date }}</p>
+    }
+    <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ blogContent.title }}</h1>
+    @if (blogContent.introText) {
+      <p class="mt-6 text-xl leading-8">{{ blogContent.introText }}</p>
+    }
+    <div class="mt-10 max-w-2xl">
+      <p>{{ blogContent.content }}</p>
+      @if (blogContent.tags && blogContent.tags.length > 0) {
+        <div class="mt-8 flex flex-wrap gap-2">
+          @for (tag of blogContent.tags; track tag) {
+            <span class="rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600">{{ tag }}</span>
+          }
+        </div>
+      }
+    </div>
+    @if (blogContent.img) {
+      <figure class="mt-16">
+        <img 
+          class="aspect-video rounded-xl bg-gray-50 object-cover" 
+          [src]="blogContent.img" 
+          [alt]="blogContent.imgAlt || blogContent.imgTitle || ''"
+          [title]="blogContent.imgTitle">
+        @if (blogContent.imgCaption) {
+          <figcaption class="mt-4 flex gap-x-2 text-sm leading-6 text-gray-500">
+            <svg class="mt-0.5 h-5 w-5 flex-none text-gray-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />
+            </svg>
+            {{ blogContent.imgCaption }}
+            @if (blogContent.imgCredit) {
+              <span class="text-gray-400">
+                @if (blogContent.imgCreditLink) {
+                  <a [href]="blogContent.imgCreditLink" [title]="blogContent.imgCreditLinkTitle || ''" class="hover:text-gray-600">Photo by {{ blogContent.imgCredit }}</a>
+                } @else {
+                  Photo by {{ blogContent.imgCredit }}
+                }
+              </span>
+            }
+          </figcaption>
+        }
+      </figure>
+    }
+    @if (blogContent.author?.name) {
+      <div class="mt-16 border-t border-gray-200 pt-8">
+        <div class="flex items-center gap-x-4">
+          @if (blogContent.author?.img) {
+            <img 
+              class="h-12 w-12 rounded-full bg-gray-50" 
+              [src]="blogContent.author?.img" 
+              [alt]="blogContent.author?.name || ''">
+          }
+          <div>
+            <p class="text-base font-semibold text-gray-900">{{ blogContent.author?.name }}</p>
+            @if (blogContent.author?.title) {
+              <p class="text-sm text-gray-600">{{ blogContent.author?.title }}</p>
+            }
+            @if (blogContent.author?.bio) {
+              <p class="mt-2 text-sm text-gray-600">{{ blogContent.author?.bio }}</p>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

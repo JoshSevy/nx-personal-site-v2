@@ -1,13 +1,22 @@
 import { Routes } from '@angular/router';
-import { pageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { BlogContentComponent } from "./components/blog-content/blog-content.component";
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: BlogContentComponent
+  },
+  {
     path: '404',
-    component: pageNotFoundComponent
+    component: PageNotFoundComponent
   },
   {
     path: '**',
-    component: pageNotFoundComponent
+    component: PageNotFoundComponent
   }
 ];
